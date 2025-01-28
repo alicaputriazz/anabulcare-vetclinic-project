@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    <style>
+
+        *{
+            font-family: "Poppins", serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            margin-top: -20vh;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            margin-top: 5%;
+            
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay gelap untuk membuat teks lebih terbaca */
+            z-index: 1;
+            margin-top: 5%;
+
+        }
+
+        .hero-content {
+            position: relative;
+            height: 100%;
+            z-index: 2;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-left: 8%;
+        }
+
+        .navbar-container {
+            position: relative;
+            z-index: 3; 
+        }
+    </style>
+</head>
+<body>
+        <!--Navbar Section-->
+        <div class="sticky-top">
+            <nav class="navbar navbar-expand-lg bg-light-subtle">
+                <div class="container px-5">
+                    <a class="navbar-brand fw-bold" href="#">AnabulCare</a>
+                    <button class="navbar-toggler border border-0 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Consultation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pet Needs</a>
+                            </li>
+                            <li class="nav-item d-lg-none">
+                                <button type="button" style="background-color: #4868EC;" class="btn btn-sm p-2 px-4 py-2 rounded-5 text-white">Get Account</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" style="background-color: #4868EC;" class="btn btn-sm p-2 px-4 py-2 rounded-5 ms-auto d-none d-lg-block text-white">Get Account</button>
+                </div>
+            </nav>
+        </div>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=1886&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="container">
+                    <h1 class="display-3 fs-2 fw-semibold mb-5 position-absolute bottom-0">Convenient online and <br>offline veterinary services</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 10%;">
+            <div class="connect-vet">
+                <div class="mt-5 rounded-5">
+                    <div class="row g-5 px-5 py-5">
+                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                            <div class="text-start ">
+                                <h3 class="fw-bold">Connect with A Vet</h3>
+                                <div class="fw-medium mt-3 text-start">
+                                    <p class="lead fw-light text-body-secondary mb-4 me-5">Get expert veterinary care from the comfort of your home. Our online consultations provide convenient access to professional advice, follow-up visits, and non-emergency consultations. Book your online appointment today for hassle-free pet care.</p>
+                                    <button type="button" class="btn px-5 py-2 rounded-pill d-inline-flex align-items-center justify-content-center mb-4 fw-medium text-white" style="background-color: #4868EC;">
+                                        Consultation Online 
+                                        <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex ">
+                            <div class="card border-0 rounded rounded-5" style="width: 90%;">
+                                <div class="ratio ratio-1x1">
+                                    <img src="https://www.maya.ph/hubfs/ConsultingOnline.jpg" 
+                                        alt="Pet Image" 
+                                        class="object-fit-cover rounded-5 mb-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-5 px-5 py-5">
+                        <div class="col-md-6 order-md-2 d-flex justify-content-center align-items-center">
+                            <div class="text-start">
+                                <h3 class="fw-bold">Visit Our Clinic</h3>
+                                <div class="fw-medium mt-3 text-start">
+                                    <p class="lead fw-light text-body-secondary mb-4 me-5">Visit our clinic for comprehensive veterinary care. Our experienced team provides thorough physical examinations, advanced diagnostics, and personalized treatments to ensure your pet's health and well-being. Schedule your in-clinic appointment today for the best in pet care.</p>
+                                    <button type="button" class="btn px-5 py-2 rounded-pill text-white" style="background-color: #4868EC;">
+                                        <a class="text-decoration-none text-white d-inline-flex align-items-center justify-content-center fw-medium" href="/consultation_schedule_visit.html">
+                                            Schedule a visit 
+                                        <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-md-1 d-flex">
+                            <div class="card border-0 rounded rounded-5" style="width: 90%;">
+                                <div class="ratio ratio-1x1">
+                                    <img src="https://images.unsplash.com/photo-1725409796872-8b41e8eca929?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                        alt="Pet Image" 
+                                        class="object-fit-cover rounded-5 mb-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer bg-secondary-subtle pt-5 pb-5 px-3 mt-5">
+            <div class="container">
+                <div class="row mx-5">
+                    <!-- First Column: AnabulCare Links -->
+                    <div class="col-md-3">
+                        <h5>AnabulCare</h5>
+                        <ul class="list-unstyled fw-light">
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Consultation</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Pet Products</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Shipping</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Return</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark mb-4" href="#">About Us</a>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <!-- Second Column: Stay Connected -->
+                    <div class="col-md-3">
+                        <h5>Stay Connected</h5>
+                        <p>Contact: <br><a href="mailto:hi.anabulpeople@care.com" class="text-decoration-none">hi.anabulpeople@care.com</a></p>
+                        <div class="mb-4">
+                            <span>
+                                <i class="bi bi-facebook" style="font-size: 2rem;"></i>
+                            </span>
+                            <span>
+                                <i class="bi bi-instagram ms-2" style="font-size: 2rem;"></i>
+                            </span>
+                        </div>
+                    </div>
+        
+                    <!-- Third Column: Join Us -->
+                    <div class="col-md-6">
+                        <h5>Join as AnabulCare and get 10% OFF</h5>
+                        <p>Our services are wide open for you</p>
+                        <button type="button" class="px-4 py-2 btn btn-sm btn-outline-dark fw-semibold rounded-3">Be Pawrents</button>
+                    </div>
+                </div>
+        
+                <!-- Footer Bottom: Terms & Privacy Policy -->
+                <div class="border-top text-start mx-5">
+                    <p>&copy; AnabulCare.co | <a href="#" class="text-decoration-none">Terms and Privacy Policy</a></p>
+                </div>
+            </div>
+        </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

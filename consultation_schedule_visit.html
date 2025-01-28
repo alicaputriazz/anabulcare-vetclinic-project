@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
+    <style>
+        *{
+            font-family: "Poppins", serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            margin-top: -20vh;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            margin-top: 5%;
+            
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay gelap untuk membuat teks lebih terbaca */
+            z-index: 1;
+            margin-top: 5%;
+
+        }
+
+        .hero-content {
+            position: relative;
+            height: 100%;
+            z-index: 2;
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-left: 8%;
+        }
+
+        .navbar-container {
+            position: relative;
+            z-index: 3; 
+        }
+        
+        /* Ensure the carousel takes up the full screen */
+        #myCarousel {
+            width: 100vw;
+            height: auto;
+            overflow: hidden;
+        }
+
+        /* Hide the carousel on mobile */
+        @media (max-width: 767.98px) {
+            #myCarousel {
+                display: none; /* Hide the carousel on mobile */
+            }
+
+            #staticList {
+                display: block !important; /* Show the static list on mobile */
+            }
+
+            .static-item {
+                margin-bottom: 1.5rem; /* Add spacing between items */
+            }
+
+            .static-item img {
+                height: 200px; /* Fixed height for images */
+                object-fit: cover; /* Maintain aspect ratio */
+            }
+
+            .static-item .card-body {
+                padding: 1.5rem; /* Add padding for better spacing */
+            }
+        }
+        .carousel-control-prev,
+        .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: adds a background color for better visibility */
+            width: 50px; /* Optional: adjust the width for a larger click area */
+            height: 50px; /* Optional: adjust the height for a larger click area */
+            border-radius: 50%; /* Optional: makes the controls circular */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-size: 100%, 100%;
+        }
+
+        .accordion-button::after {
+            display: none;
+        }
+        
+        .custom-plus {
+            width: 35px;
+            height: 35px;
+            background-color: #F2F4F5;
+            border-radius: 50%;
+            color: #090A0A  ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) .custom-plus {
+            transform: rotate(45deg);
+        }
+
+        .accordion-button {
+            padding: 1rem;
+            
+            
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #4868EC;
+            color: #F2F4F5;
+            font-weight: 600;
+        }
+
+        .accordion-body {
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .stepwizard-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .stepwizard-step {
+            text-align: center;
+        }
+
+        .btn-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: center;
+            padding: 0;
+        }
+
+        .btn-primary {
+            background-color: #4868EC;
+            border-color: #4868EC;
+        }
+
+        .btn-default {
+            background-color: #e9ecef;
+            border-color: #e9ecef;
+        }
+
+        /* Style untuk tombol "Continue" */
+        .nextBtn {
+            background-color: #4868EC;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .nextBtn:hover {
+            background-color: #3a54c7;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+        <!--Navbar Section-->
+        <div class="sticky-top">
+            <nav class="navbar navbar-expand-lg bg-light-subtle">
+                <div class="container px-5">
+                    <a class="navbar-brand fw-bold" href="#">AnabulCare</a>
+                    <button class="navbar-toggler border border-0 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Consultation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pet Needs</a>
+                            </li>
+                            <li class="nav-item d-lg-none">
+                                <button type="button" style="background-color: #4868EC;" class="btn btn-sm p-2 px-4 py-2 rounded-5 text-white">Get Account</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" style="background-color: #4868EC;" class="btn btn-sm p-2 px-4 py-2 rounded-5 ms-auto d-none d-lg-block text-white">Get Account</button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1596272875729-ed2ff7d6d9c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="container position-absolute top-50 ">
+                    <h1 class="display-3 fs-2 fw-semibold">Visit us for expert pet care</h1>
+                    <hr style="border-top: 4px solid #fff; margin: 1rem 0; width: 10%;">
+                    <p class="lead fw-light fs-4">Where compassion meets excellence!</p>
+                    <button type="button" class="btn px-5 py-2 rounded-pill" style="background-color: #4868EC;">
+                        <a class="text-decoration-none text-white d-inline-flex align-items-center justify-content-center fw-medium" href="/consultation_schedule_visit.html">
+                            Book Visit 
+                            <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                        </a>
+                    </button>
+                </div>                
+            </div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="container py-5">
+            <div class="description mt-5">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h2 class="fw-bold">Providing best services for your pets</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="fw-light text-body-secondary">At AnabulCare, our in-clinic consultations offer comprehensive care to ensure your pet's health and well-being. Our experienced veterinarians conduct thorough physical examinations, use advanced diagnostic tools, and create personalized treatment plans tailored to your pet's unique needs.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <img class="rounded-5 img-fluid w-100" src="https://todaysveterinarybusiness.com/wp-content/uploads/sites/2/2024/01/Viewpoint-2-0224.jpg" alt="Vet clinic">
+            </div>
+        </div>
+
+        <!-- Clinic Location Section -->
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="fw-bold m-0">Clinic Location</h2>
+                <a href="#" class="text-primary d-none d-lg-block text-decoration-none">see all</a>
+            </div>
+            <!-- carousel for desktop -->
+            <div id="myCarousel" class="carousel slide container" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Carousel Item 1 -->
+                    <div class="carousel-item active">
+                        <div class="container m-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="https://i.pinimg.com/736x/d8/12/8f/d8128f57b4fefaf6857e80f3ff7270a2.jpg" class="img-fluid rounded" alt="Location 1" style="height: 400px; width: 500px; object-fit: cover;">
+                                </div>
+                                <div class="col-md-6 align-items-center py-5">
+                                    <div class="card-body text-start align-items-center">
+                                        <h3 class="card-title fw-bold">Pawsville</h3>
+                                        <p class="card-text text-body-secondary me-5 pe-5 mt-3 ">Located at the heart of Pawsville, our clinic at 123 Pet Care Lane offers a warm and welcoming environment for you and your pet. With convenient access and ample parking, we’ve designed our space to be as comfortable and stress-free as possible. Drop by and let our dedicated team provide your furry friend with top-notch care right in the heart of the community.</p>
+                                        <p class="card-text"><small class="text-muted">Open 24/7</small></p>
+                                        <button type="button" class="btn text-white px-5 py-2 rounded-pill d-flex align-items-center justify-between" data-bs-toggle="modal" data-bs-target="#bookVisit" style="background-color: #4868EC;">
+                                            <span>Book Visit </span>
+                                            <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel Item 2 -->
+                    <div class="carousel-item">
+                        <div class="container m-0">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <img src="https://i.pinimg.com/736x/3d/cf/3d/3dcf3dbbdcb8176d4a58ad7e8428b341.jpg" class="img-fluid rounded" alt="Location 2" style="height: 400px; width: 500px; object-fit: cover;">
+                                </div>
+                                <div class="col-md-6 align-items-center py-5">
+                                    <div class="card-body text-start align-items-center">
+                                        <h3 class="card-title fw-bold">Barktown</h3>
+                                        <p class="card-text text-body-secondary me-5 pe-5 mt-3 ">Find us at 456 Furry Friend Road in vibrant Barktown, where our clinic stands ready to deliver outstanding veterinary services. Our prime location is easily accessible with plenty of parking, making your visit smooth and hassle-free. Experience compassionate care and expert treatment in a facility designed with your pet’s well-being in mind.</p>
+                                        <p class="card-text"><small class="text-muted">Open 24/7</small></p>
+                                        <button type="button" class="btn text-white px-5 py-2 rounded-pill d-flex align-items-center justify-between" data-bs-toggle="modal" data-bs-target="#bookVisit" style="background-color: #4868EC;">
+                                            <span>Book Visit </span>
+                                            <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel Item 3 -->
+                    <div class="carousel-item">
+                        <div class="container m-0">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <img src="https://i.pinimg.com/736x/7f/28/55/7f28556f192ebdbed2c8c313ca00a126.jpg" class="img-fluid rounded" alt="Location 2"  style="height: 400px; width: 500px; object-fit: cover;">
+                                </div>
+                                <div class="col-md-6 align-items-center py-5">
+                                    <div class="card-body text-start align-items-center">
+                                        <h3 class="card-title fw-bold">Meow City</h3>
+                                        <p class="card-text text-body-secondary me-5 pe-5 mt-3 ">Situated at 789 Whisker Way, our clinic in Meow City is the perfect spot for your pet’s health needs. Our central location ensures easy access and a friendly atmosphere, with ample parking to make your visit convenient. Come see us and discover how our dedicated team can make a difference in your pet’s life with exceptional care and personalized service.</p>
+                                        <p class="card-text"><small class="text-muted">Open 24/7</small></p>
+                                        <button type="button" class="btn text-white px-5 py-2 rounded-pill d-flex align-items-center justify-between" data-bs-toggle="modal" data-bs-target="#bookVisit" style="background-color: #4868EC;">
+                                            <span>Book Visit </span>
+                                            <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Controls (Hidden on Mobile) -->
+                <button class="container carousel-control-prev d-none d-md-block" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next d-none d-md-block" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!-- Static List for Mobile -->
+            <div id="staticList" class="d-none container mt-4"> <!-- Hidden by default -->
+                <!-- Static Item 1 -->
+                <div class="static-item mb-4">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <img src="https://i.pinimg.com/736x/3d/cf/3d/3dcf3dbbdcb8176d4a58ad7e8428b341.jpg" class="img-fluid w-100 rounded-top" alt="Location 1" style="height: 200px; object-fit: cover;">
+                        </div>
+                        <div class="col-12 bg-light rounded-bottom p-3">
+                            <div class="card-body text-start">
+                                <h5 class="card-title fw-bold">Barktown</h5>
+                                <p class="card-text">Find us at 456 Furry Friend Road in vibrant Barktown, where our clinic stands ready to deliver outstanding veterinary services. Our prime location is easily accessible with plenty of parking, making your visit smooth and hassle-free. Experience compassionate care and expert treatment in a facility designed with your pet’s well-being in mind.</p>
+                                <p class="card-text"><small class="text-muted">Open 24/7</small></p>
+                                <button type="button" class="btn text-white px-5 py-2 rounded-pill d-flex align-items-center justify-between" data-bs-toggle="modal" data-bs-target="#bookVisit" style="background-color: #4868EC;">
+                                    <span>Book Visit </span>
+                                    <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Static Item 2 -->
+                <div class="static-item mb-4">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <img src="https://i.pinimg.com/736x/d8/12/8f/d8128f57b4fefaf6857e80f3ff7270a2.jpg" class="img-fluid w-100 rounded-top" alt="Location 2" style="height: 200px; object-fit: cover;">
+                        </div>
+                        <div class="col-12 bg-light rounded-bottom p-3">
+                            <div class="card-body text-start">
+                                <h5 class="card-title fw-bold">Pawsville</h5>
+                                <p class="card-text">Located at the heart of Pawsville, our clinic at 123 Pet Care Lane offers a warm and welcoming environment for you and your pet. With convenient access and ample parking, we’ve designed our space to be as comfortable and stress-free as possible. Drop by and let our dedicated team provide your furry friend with top-notch care right in the heart of the community.</p>
+                                <p class="card-text"><small class="text-muted">Open 24/7</small></p>
+                                <button type="button" class="btn text-white px-5 py-2 rounded-pill d-flex align-items-center justify-between" data-bs-toggle="modal" data-bs-target="#bookVisit" style="background-color: #4868EC;">
+                                    <span>Book Visit </span>
+                                    <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Static Item 3 -->
+                <div class="static-item mb-4">
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <img src="https://i.pinimg.com/736x/7f/28/55/7f28556f192ebdbed2c8c313ca00a126.jpg" class="img-fluid w-100 rounded-top" alt="Location 2" style="height: 200px; object-fit: cover;">
+                        </div>
+                        <div class="col-12 bg-light rounded-bottom p-3">
+                            <div class="card-body text-start">
+                                <h5 class="card-title fw-bold">Meow City</h5>
+                                <p class="card-text">Situated at 789 Whisker Way, our clinic in Meow City is the perfect spot for your pet’s health needs. Our central location ensures easy access and a friendly atmosphere, with ample parking to make your visit convenient. Come see us and discover how our dedicated team can make a difference in your pet’s life with exceptional care and personalized service.</p>
+                                <p class="card-text"><small class="text-muted">Open 24/7</small></p>
+                                <button type="button" class="btn text-white px-5 py-2 rounded-pill d-flex align-items-center justify-between" data-bs-toggle="modal" data-bs-target="#bookVisit" style="background-color: #4868EC;">
+                                    <span>Book Visit </span>
+                                    <i class="bi bi-arrow-right ms-2 fs-3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+        <!-- Modal -->
+        <div class="modal fade" id="bookVisit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #182559; height: 114px;">
+                        <h1 class="modal-title fs-5 text-white ms-3" id="exampleModalLabel">Booking Visit Form</h1>
+                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close" style="background-color: #F2F4F5; border-radius: 50%; width: 1rem;"></button>
+                    </div>
+                    <div class="modal-body m-4">
+                        <!-- Step Wizard -->
+                        <div class="stepwizard">
+                            <div class="stepwizard-row setup-panel">
+                                <div class="stepwizard-step">
+                                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                    <p class="fw-bold mt-3">Booking Details</p>
+                                </div>
+                                <div class="stepwizard-step">
+                                    <a href="#step-2" type="button" class="btn btn-default btn-circle disabled">2</a>
+                                    <p class="fw-bold mt-3">Select Date & Time</p>
+                                </div>
+                                <div class="stepwizard-step">
+                                    <a href="#step-3" type="button" class="btn btn-default btn-circle disabled">3</a>
+                                    <p class="fw-bold mt-3">Select Payment</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Form -->
+                        <form action="/booking_confirmed.html" role="form" id="form">
+                            <!-- Step 1 -->
+                            <div class="row setup-content gy-4" id="step-1">
+                                <h3 class="fw-normal fs-5 mb-3">Personal Information</h3>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2 mb-2">First Name</label>
+                                        <input class="form-control form-control-sm"  maxlength="100" type="text" required class="form-control" placeholder="Budi" id="firstName"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2 mb-2">Last Name</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="text" required class="form-control" placeholder="Similikiwaw" id="lastName"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Mobile Number</label>
+                                        <input class="form-control form-control-sm"  maxlength="100" type="number" required class="form-control" placeholder="1234-5678-9112" id="number"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2 mb-2">Email</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="email" required class="form-control" placeholder="similikiwaw@mail.com" id="email"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Address</label>
+                                        <input class="form-control form-control-sm mb-3" maxlength="100" type="text" required class="form-control" placeholder="Nanas Rd Bikini Bottom" id="address"/>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3 class="fw-normal fs-5 mb-3">Pet Information</h3>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2 ">Pet Name</label>
+                                        <input class="form-control form-control-sm"  maxlength="100" type="text" required class="form-control" placeholder="Lucy" id="petName"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Type</label>
+                                        <select class="form-select form-select-sm text-muted"  id="type" aria-label="Small select example">
+                                            <option selected>Open Choose Type Animal</option>
+                                            <option value="1">Dog</option>
+                                            <option value="2">Cat</option>
+                                            <option value="3">Monkey</option>
+                                            <option value="4">Rabbit</option>
+                                            <option value="5">Hamster</option>
+                                            <option value="6">Chicken</option>
+                                            <option value="7">Duck</option>
+                                            <option value="8">Reptile</option>
+                                            <option value="9">None Of These Option</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Breed</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="text" required class="form-control" placeholder="Golden Retriever" id="breed"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Age</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="number" required class="form-control" placeholder="3 years old" id="age"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Period of Illness</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="number" required class="form-control" placeholder="3 days" id="periodIllness"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Problem</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="text" required class="form-control" placeholder="Swollen in leg for 3 days" id="problem"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="row setup-content gy-4 mt-3" id="step-2">
+                                <h3 class="fw-normal fs-5 mb-3">Schedule Date & Time</h3>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Date</label>
+                                        <input type="date" class="form-control form-control-sm" required class="form-control" placeholder="Select Date" id="date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Time</label>
+                                        <input type="time" class="form-control form-control-sm" required class="form-control" placeholder="Select Time" id="time">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Clinic</label>
+                                        <select class="form-select form-select-sm text-muted" required class="form-control" aria-label="Small select example" name="" id="clinic">
+                                            <option selected>Choose Clinic</option>
+                                            <option value="1">Pawsville</option>
+                                            <option value="2">Barktown</option>
+                                            <option value="3">Meow City</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Consultation with</label>
+                                        <select class="form-select form-select-sm text-muted" required class="form-control" aria-label="Small select example" name="" id="consultor">
+                                            <option selected>Choose Consultor</option>
+                                            <option value="1">James</option>
+                                            <option value="2">Ben</option>
+                                            <option value="3">Miller</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="row setup-content gy-4 mt-3" id="step-3">
+                                <h3 class="fw-normal fs-5 mb-3">Payment</h3>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Choose Payment Method</label>
+                                        <select class="form-select form-select-sm text-muted"  id="payMethod" aria-label="Small select example">
+                                            <option selected>Credit Card</option>
+                                            <option value="1">Visa</option>
+                                            <option value="2">American Express</option>
+                                            <option value="3">Master Card</option>
+                                            <option value="4">Apple Pay</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Card Name</label>
+                                        <input class="form-control form-control-sm"  maxlength="100" type="text" required class="form-control" placeholder="Budi Similikiwaw" id="cardName"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Card Number</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="number" required class="form-control" placeholder="01234 5678 1234" id="cardNumber"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">Expired Card</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="date" required class="form-control" placeholder="3 days" id="edCard"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="font-size: small; font-weight: 500;">
+                                        <label for="" class="control-label mb-2">CVV</label>
+                                        <input class="form-control form-control-sm" maxlength="100" type="number" required class="form-control" placeholder="000" id="cvv"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Modal Footer -->
+                    <div class="modal-footer justify-content-between" style="background-color: #F7F9FA;">
+                        <button type="button" class="btn prevBtn pull-left fw-light ms-3 fs-6 px-4 py-3 rounded-pill d-flex align-items-center justify-content-center" style="border: 2px solid #4868EC; color: #4868EC; background-color: transparent;">
+                            <span>Previous</span>
+                        </button>
+                        <button type="button" class="btn nextBtn pull-right fw-light me-3 fs-6 text-white px-4 py-3 rounded-pill d-flex align-items-center justify-between" style="background-color: #4868EC;">
+                            <span>Continue</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faq -->
+        <div class="container">
+            <div class="mx-5 my-5">
+                <div class="accordion" id="faqAccordion">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <h2 class="fw-bold m-0">Frequently Asked Questions</h2>
+                    </div>
+                    <!-- FAQ Item 1 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                What is AnabulCare?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                AnabulCare is a service platform dedicated to providing veterinary care and support for pets. It offers consultations, advice, and resources to ensure the health and well-being of animals, with a focus on convenience and accessibility for pet owners.
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- FAQ Item 2 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                How can I book consultation?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Booking a consultation with AnabulCare can typically be done through their website or app, where you can choose between different services and schedule an appointment with a professional, either online or in person, depending on your needs.
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- FAQ Item 3 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                What’s the differences between online and offline consultation?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                The primary difference between online and offline consultations lies in the mode of interaction. Online consultations are conducted via video calls or chats, allowing pet owners to consult with veterinarians remotely, while offline consultations are in-person appointments at a physical location for hands-on examination and treatment.
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- FAQ Item 4 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                How do I pay for the scheduling my visit?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Payments for consultations and services can usually be made online via secure payment methods, such as credit cards, bank transfers, or payment apps, at the time of booking. Payment details will be provided during the booking process.
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- FAQ Item 5 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                Do you have a store location?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                AnabulCare may have physical locations where you can visit for in-person consultations or purchase pet care products. You can find specific store details, including address and contact information, on their website or app.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 6 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+                                How is the shipping for buying pet products?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                When purchasing pet products, shipping can vary depending on the retailer or online store you're buying from. Most stores offer standard shipping, express shipping, or sometimes free shipping promotions, with delivery times ranging from a few days to over a week, depending on the shipping option and location. Some retailers may also offer international shipping if you're purchasing from abroad. It’s important to check the store’s shipping policy for details on fees, delivery times, and whether they ship to your location.                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- FAQ Item 7 -->
+                    <div class="accordion-item mb-3 border border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
+                                How can I get refund?
+                                <span class="custom-plus">+</span>
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                If you need to request a refund for a pet product, the process typically involves contacting the retailer’s customer service team. Most stores offer refunds for products that are faulty or damaged, and many will allow returns within a set period after purchase (e.g., 30 days). Refund policies vary, so it’s crucial to review the store’s return and refund policy before making a purchase. Some stores may require you to return the product in its original packaging or provide proof of purchase. Once the return is approved, the refund will usually be processed to your original payment method.
+                                <br> These general guidelines can help you navigate the shipping and refund processes when buying pet products online or in stores. Always be sure to check the specific terms and conditions of the retailer you're buying from for more detailed information.                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Footer -->
+        <footer class="footer bg-secondary-subtle pt-5 pb-5 px-3 mt-5">
+            <div class="container">
+                <div class="row mx-5">
+                    <!-- First Column: AnabulCare Links -->
+                    <div class="col-md-3">
+                        <h5>AnabulCare</h5>
+                        <ul class="list-unstyled fw-light">
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Consultation</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Pet Products</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Shipping</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark" href="#">Return</a>
+                            </li>
+                            <li>
+                                <a class="text-decoration-none text-dark mb-4" href="#">About Us</a>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <!-- Second Column: Stay Connected -->
+                    <div class="col-md-3">
+                        <h5>Stay Connected</h5>
+                        <p>Contact: <br><a href="mailto:hi.anabulpeople@care.com" class="text-decoration-none">hi.anabulpeople@care.com</a></p>
+                        <div class="mb-4">
+                            <span>
+                                <i class="bi bi-facebook" style="font-size: 2rem;"></i>
+                            </span>
+                            <span>
+                                <i class="bi bi-instagram ms-2" style="font-size: 2rem;"></i>
+                            </span>
+                        </div>
+                    </div>
+        
+                    <!-- Third Column: Join Us -->
+                    <div class="col-md-6">
+                        <h5>Join as AnabulCare and get 10% OFF</h5>
+                        <p>Our services are wide open for you</p>
+                        <button type="button" class="px-4 py-2 btn btn-sm btn-outline-dark fw-semibold rounded-3">Be Pawrents</button>
+                    </div>
+                </div>
+        
+                <!-- Footer Bottom: Terms & Privacy Policy -->
+                <div class="border-top text-start mx-5">
+                    <p>&copy; AnabulCare.co | <a href="#" class="text-decoration-none">Terms and Privacy Policy</a></p>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $("#myCarousel").on("slide.bs.carousel", function(e) {
+                    var $e = $(e.relatedTarget);
+                    var idx = $e.index();
+                    var itemsPerSlide = 3;
+                    var totalItems = $(".carousel-item").length;
+
+                    if (idx >= totalItems - (itemsPerSlide - 1)) {
+                    var it = itemsPerSlide - (totalItems - idx);
+                    for (var i = 0; i < it; i++) {
+                        // append slides to end
+                        if (e.direction == "left") {
+                        $(".carousel-item")
+                            .eq(i)
+                            .appendTo(".carousel-inner");
+                        } else {
+                        $(".carousel-item")
+                            .eq(0)
+                            .appendTo($(this).find(".carousel-inner"));
+                        }
+                    }
+                }
+            });
+            // Track the current step
+            var currentStep = 1;
+            
+            // Total number of steps
+            var totalSteps = 3;
+            
+            // Function to validate current step
+            function validateStep(step) {
+                var isValid = true;
+                
+                // Select inputs in the current step
+                $('#step-' + step + ' input, #step-' + step + ' select').each(function() {
+                    if ($(this).prop('required')) {
+                        // Check if required fields are filled
+                        if (!$(this).val()) {
+                            $(this).addClass('is-invalid');
+                            isValid = false;
+                        } else {
+                            $(this).removeClass('is-invalid');
+                        }
+                        
+                        // Additional specific validations
+                        if (step === 1) {
+                            // Email validation
+                            if ($(this).attr('type') === 'email') {
+                                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailRegex.test($(this).val())) {
+                                    $(this).addClass('is-invalid');
+                                    isValid = false;
+                                }
+                            }
+                        }
+                        
+                        if (step === 2) {
+                            // Validate pet type is not default
+                            if ($(this).attr('id') === 'type' && $(this).val() === 'Open Choose Type Animal') {
+                                $(this).addClass('is-invalid');
+                                isValid = false;
+                            }
+                        }
+                        
+                        if (step === 3) {
+                            // CVV validation
+                            if ($(this).attr('id') === 'cvv') {
+                                var cvvRegex = /^[0-9]{3}$/;
+                                if (!cvvRegex.test($(this).val())) {
+                                    $(this).addClass('is-invalid');
+                                    isValid = false;
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            // Function to show a specific step
+            function showStep(step) {
+                // Hide all steps
+                $('.setup-content').hide();
+                
+                // Show current step
+                $('#step-' + step).show();
+                
+                // Update wizard indicators
+                $('.stepwizard-step').each(function(index) {
+                    var stepNum = index + 1;
+                    var $stepBtn = $(this).find('.btn');
+                    
+                    if (stepNum < step) {
+                        // Completed steps
+                        $stepBtn.removeClass('btn-default btn-primary').addClass('btn-secondary');
+                    } else if (stepNum === step) {
+                        // Current step
+                        $stepBtn.removeClass('btn-default btn-secondary').addClass('btn-primary');
+                    } else {
+                        // Future steps
+                        $stepBtn.removeClass('btn-primary btn-secondary').addClass('btn-default disabled');
+                    }
+                });
+                
+                // Update button states
+                $('.prevBtn').toggleClass('disabled', step === 1);
+                $('.nextBtn').text(step === totalSteps ? 'Submit' : 'Continue');
+            }
+            
+            // Next button click handler
+            $('.nextBtn').click(function() {
+                if (validateStep(currentStep)) {
+                    if (currentStep < totalSteps) {
+                        currentStep++;
+                        showStep(currentStep);
+                    } else {
+                        // Final submit - you can add AJAX submission here
+                        alert('Form Submitted! (Replace with actual submission logic)');
+                    }
+                }
+            });
+            
+            // Previous button click handler
+            $('.prevBtn').click(function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+            
+            // Initial setup
+            showStep(1);
+        });
+
+        </script>
+</body>
+</html>
