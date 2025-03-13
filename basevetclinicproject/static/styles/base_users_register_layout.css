@@ -1,0 +1,124 @@
+body {
+    background-color: #f5f8ff;
+}
+
+.box-area {
+    width: 100%;
+    max-width: 930px;
+    background: white;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.box-area:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.left-box {
+    background: linear-gradient(135deg, #4868EC, #3451d1);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
+}
+
+.left-box::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(-45deg);
+    top: -50%;
+    left: -50%;
+}
+
+.right-box {
+    padding: 40px 30px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #4868EC;
+}
+
+.btn-primary {
+    background: #4868EC;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #3451d1;
+    transform: translateY(-2px);
+}
+
+.nav-tabs {
+    border: none;
+    margin-bottom: 20px;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #666;
+    font-weight: 500;
+    padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #4868EC;
+    background: none;
+    border-bottom: 2px solid #4868EC;
+}
+
+.featured-image img {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+}
+
+.featured-image img:hover {
+    transform: scale(1.05);
+}
+
+.social-login {
+    position: relative;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.social-login::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+    z-index: 1;
+}
+
+.social-login span {
+    background: white;
+    padding: 0 15px;
+    color: #777;
+    position: relative;
+    z-index: 2;
+}
+
+@media only screen and (max-width: 768px) {
+    .box-area {
+        margin: 0 10px;
+    }
+
+    .left-box {
+        height: auto;
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .right-box {
+        padding: 20px 10px;
+    }
+}

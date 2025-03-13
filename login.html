@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnabulCare Portal - Login/Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    * {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f5f8ff;
+}
+
+.box-area {
+    width: 100%;
+    max-width: 930px;
+    background: white;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.box-area:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.left-box {
+    background: linear-gradient(135deg, #4868EC, #3451d1);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
+}
+
+.left-box::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(-45deg);
+    top: -50%;
+    left: -50%;
+}
+
+.right-box {
+    padding: 40px 30px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #4868EC;
+}
+
+.btn-primary {
+    background: #4868EC;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #3451d1;
+    transform: translateY(-2px);
+}
+
+.nav-tabs {
+    border: none;
+    margin-bottom: 20px;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #666;
+    font-weight: 500;
+    padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #4868EC;
+    background: none;
+    border-bottom: 2px solid #4868EC;
+}
+
+.featured-image img {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+}
+
+.featured-image img:hover {
+    transform: scale(1.05);
+}
+
+.social-login {
+    position: relative;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.social-login::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+    z-index: 1;
+}
+
+.social-login span {
+    background: white;
+    padding: 0 15px;
+    color: #777;
+    position: relative;
+    z-index: 2;
+}
+
+@media only screen and (max-width: 768px) {
+    .box-area {
+        margin: 0 10px;
+    }
+
+    .left-box {
+        height: auto;
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .right-box {
+        padding: 20px 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+            <!-- Left Box -->
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
+                <div class="featured-image mb-3">
+                    <img class="img-fluid" style="width: 250px;" src="Cat and dog-amico.svg" alt="Veterinary Care">
+                </div>
+                <p class="text-white fs-2 fw-bold">AnabulCare Portal</p>
+                <small class="text-white text-wrap text-center px-4">Connect with our experienced veterinarians for the best care of your beloved pets</small>
+            </div>
+
+            <!-- Right Box -->
+            <div class="col-md-6 right-box">
+                <div class="mb-4">
+                    <h4 class="fw-bold">Welcome Back!</h4>
+                    <p class="text-muted">Please login to your account</p>
+                </div>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email" class="form-control form-control-sm bg-light" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Password</label>
+                        <input type="password" class="form-control form-control-sm bg-light" placeholder="Enter your password">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label text-secondary" for="rememberMe">Remember me</label>
+                        </div>
+                        <a href="#" class="text-primary text-decoration-none">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                </form>
+
+                <div class="text-center mb-3">
+                    Don't have an account? <a href="signup.html" class="text-primary text-decoration-none">Sign up</a>
+                </div>
+
+                <div class="social-login text-center mb-3">
+                    <span>Or continue with</span>
+                </div>
+
+                <button class="btn btn-light w-100 mb-3">
+                    <svg class="me-2" style="width: 20px;" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

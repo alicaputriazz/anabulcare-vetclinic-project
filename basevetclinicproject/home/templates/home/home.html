@@ -1,0 +1,130 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %} AnabulCare {% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/home_style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1579119134757-5c38803f34fc?q=80&w=2070');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="display-3 fs-2 fw-semibold mb-5 position-absolute bottom-0">Ensuring your pets <br>live their best lives</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Our Description -->
+    <div class="bg-body-tertiary">
+        <div class="description container">
+            <div class="mx-3">
+                <div class="row gx-2" style="margin-top: 5%;">
+                    <div class="col-md-7 px-5 py-5 d-flex align-items-center justify-content-center position-relative">
+                        <div class="text-start">
+                            <h1 class="fw-bold">Prioritizing your pet companion</h1>
+                            <div class="fw-medium mt-3">
+                                <p>At AnabulCare, our primary goal is to ensure that every pet we care for leads a happy, healthy life. We are dedicated to providing the highest standard of veterinary care, delivered with compassion and professionalism.</p>
+                                <p>Our team of experienced veterinarians and support staff work tirelessly to promote preventive care for your lovely cat, providing comprehensive treatments and supporting through all life stages.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 px-5 py-5">
+                        <div class="card border-0">
+                            <img src="https://images.unsplash.com/photo-1602979677071-1781b7f40023?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pet Image" class="img-fluid card-img-top rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Our Benefit -->
+    <div class="container">
+        <div class="benefits mx-3 mt-5">
+            <h1 class="fw-bold">BENEFITS</h1>
+            <div class="row mt-5 g-4">
+                <!-- Kolom 1 -->
+                <div class="col-sm-4">
+                    <div class="card border-0">
+                        <div class="ratio ratio-1x1">
+                            <img src="https://i.pinimg.com/736x/b7/ac/50/b7ac5058e0b3e56bcc796cd895fb8efe.jpg" 
+                                alt="Vet Team" 
+                                class="object-fit-cover rounded">
+                        </div>
+                        <div class="position-absolute bottom-0 start-0 m-3">
+                            <span class="bg-light-subtle fw-bold fs-5 px-4 py-3 rounded-pill d-inline-block">
+                                Professional Team
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kolom 2 -->
+                <div class="col-sm-4">
+                    <div class="card border-0">
+                        <div class="ratio ratio-1x1">
+                            <img src="https://i.pinimg.com/736x/05/74/b7/0574b70ab83876f3a813f46c4ff54580.jpg" 
+                                alt="Pet Image" 
+                                class="object-fit-cover rounded">
+                        </div>
+                        <div class="position-absolute bottom-0 start-0 m-3">
+                            <span class="bg-light-subtle fw-bold fs-5 px-4 py-3 rounded-pill d-inline-block">
+                                Treat With Love
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kolom 3 -->
+                <div class="col-sm-4">
+                    <div class="card border-0">
+                        <div class="ratio ratio-1x1">
+                            <img src="https://i.pinimg.com/736x/53/7e/aa/537eaa8174e1e7b491b2f43826e6c395.jpg" 
+                                alt="Pet Image" 
+                                class="object-fit-cover rounded">
+                        </div>
+                        <div class="position-absolute bottom-0 start-0 m-3">
+                            <span class="bg-light-subtle fw-bold fs-5 px-4 py-3 rounded-pill d-inline-block">
+                                Emergency Caring
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    
+    <!-- Our Contact -->
+    <div class="container">
+        <div class="contact">
+            <div class="mx-4 mt-5 rounded-5" style="background-color: #0e153a;">
+                <div class="row g-2 p-5">
+                    <div class="col-md-7 d-flex justify-content-center align-items-center">
+                        <div class="text-start">
+                            <h1 class="fw-semibold fs-2 text-white mb-5">Our experts are <br>available for you 24/7</h1>
+                            <div class="fw-light fs-4 text-white">
+                                <p>&#128222 +6282224445690</p>
+                                <p>&#128222 +6282224445690 <br>(Emergency Call)</p>
+                                <p>&#128140 anabul@care.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 d-flex justify-content-center align-items-center">
+                        <div class="card border-0" style="width: 20rem;">
+                            <div class="ratio ratio-1x1">
+                                <img src="https://i.pinimg.com/736x/ae/17/08/ae17081c25437ed8a16675dd3506da73.jpg" 
+                                    alt="Pet Image" 
+                                    class="object-fit-cover rounded">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
